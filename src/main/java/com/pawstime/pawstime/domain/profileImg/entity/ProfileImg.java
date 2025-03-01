@@ -24,6 +24,7 @@ public class ProfileImg extends BaseEntity {
     @JoinColumn(name="user_id")
     private User user;
 
-
+    @Column(nullable = false)
+    private String imgUrl;
 
 }
