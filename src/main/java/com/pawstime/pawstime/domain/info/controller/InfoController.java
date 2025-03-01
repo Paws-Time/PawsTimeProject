@@ -2,10 +2,11 @@ package com.pawstime.pawstime.domain.info.controller;
 
 
 import com.pawstime.pawstime.domain.info.dto.resp.GetHospitalInfoRespDto;
+import com.pawstime.pawstime.domain.info.dto.resp.GetShelterInfoRespDto;
+import com.pawstime.pawstime.domain.info.dto.resp.GetShelterOperationInfoRespDto;
 import com.pawstime.pawstime.domain.info.facade.InfoFacade;
 import com.pawstime.pawstime.global.common.ApiResponse;
 import com.pawstime.pawstime.global.enums.Status;
-import com.pawstime.pawstime.global.exception.CustomException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
@@ -28,7 +29,7 @@ public class InfoController {
 
   private final InfoFacade infoFacade;
 
-  @Operation(summary = "지역별 동물병원 정보 목록 조회")
+  @Operation(summary = "지역별 동물 병원 정보 목록 조회")
   @GetMapping("/hospitals/{addNum}")
   public ResponseEntity<ApiResponse<List<GetHospitalInfoRespDto>>> getHospitalInfo(
       @RequestParam(defaultValue = "0") int pageNo,
@@ -37,19 +38,20 @@ public class InfoController {
       @RequestParam(defaultValue = "DESC") String direction,
       @PathVariable int addNum
   ) {
-    try {
       return ApiResponse.generateResp(
           Status.SUCCESS, null, infoFacade.readHospitalInfo(pageNo, pageSize, sortBy, direction, addNum).getContent());
-    } catch (CustomException e) {
-      Status status = Status.valueOf(e.getClass()
-          .getSimpleName()
-          .replace("Exception", "")
-          .toUpperCase());
-      return ApiResponse.generateResp(status, e.getMessage(), null);
+  }
 
-    } catch (Exception e) {
-      return ApiResponse.generateResp(
-          Status.ERROR, "정보 게시판 조회 중 오류가 발생하였습니다 : " + e.getMessage(), null);
-    }
+  @Operation(summary = "지역별 동물 보호소 정보 목록 조회 (필수정보 조회 기능)")
+  @GetMapping("/shelters/{addNum}")
+  public ResponseEntity<ApiResponse<List<GetShelterInfoRespDto>>> getShelterInfo(
+      @RequestParam(defaultValue = "0") int pageNo,
+      @RequestParam(defaultValue = "10") int pageSize,
+      @RequestParam(defaultValue = "name") String sortBy,
+      @RequestParam(defaultValue = "DESC") String direction,
+      @PathVariable int addNum
+  ) {
+    return ApiResponse.generateResp(
+        Status.SUCCESS, null, infoFacade.readShelterInfo(pageNo, pageSize, sortBy, direction, addNum).getContent());
   }
 }
