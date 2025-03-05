@@ -1,9 +1,9 @@
 package com.pawstime.pawstime.domain.image.service;
 
+import com.pawstime.pawstime.aws.s3.service.S3Service;
 import com.pawstime.pawstime.domain.image.entity.Image;
 import com.pawstime.pawstime.domain.image.entity.repository.ImageRepository;
 import com.pawstime.pawstime.domain.post.entity.Post;
-import com.pawstime.pawstime.domain.post.service.S3Service;
 import com.pawstime.pawstime.global.exception.NotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

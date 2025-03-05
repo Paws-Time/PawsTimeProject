@@ -1,27 +1,21 @@
 package com.pawstime.pawstime.domain.post.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.pawstime.pawstime.aws.s3.service.S3Service;
 import com.pawstime.pawstime.domain.image.dto.resp.GetImageRespDto;
 import com.pawstime.pawstime.domain.like.facade.LikeFacade;
 import com.pawstime.pawstime.domain.post.dto.req.CreatePostReqDto;
 import com.pawstime.pawstime.domain.post.dto.req.UpdatePostReqDto;
 import com.pawstime.pawstime.domain.post.dto.resp.GetDetailPostRespDto;
 import com.pawstime.pawstime.domain.post.dto.resp.GetListPostRespDto;
-import com.pawstime.pawstime.domain.post.entity.Post;
 import com.pawstime.pawstime.domain.post.facade.PostFacade;
-import com.pawstime.pawstime.domain.post.service.S3Service;
 import com.pawstime.pawstime.global.common.ApiResponse;
 import com.pawstime.pawstime.global.enums.Status;
 import com.pawstime.pawstime.global.exception.CustomException;
-import com.pawstime.pawstime.global.exception.InvalidException;
-import com.pawstime.pawstime.global.exception.NotFoundException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.validation.Valid;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import lombok.RequiredArgsConstructor;
@@ -45,7 +39,6 @@ import org.springframework.web.multipart.MultipartFile;
 public class PostController {
 
   private final PostFacade postFacade;
-  private final LikeFacade likeFacade;
   private final S3Service s3Service;
 
   @Operation(summary = "게시글 생성", description = "게시글을 생성할 수 있습니다.")
