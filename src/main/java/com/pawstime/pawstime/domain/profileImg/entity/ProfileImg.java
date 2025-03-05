@@ -28,4 +28,8 @@ public class ProfileImg extends BaseEntity {
     @Column(nullable = false)
     private String profileImgUrl;
 
+    public void updateProfileImgUrl(String newProfileImgUrl){
+        this.profileImgUrl = newProfileImgUrl;
+    }
+
 }

@@ -1,9 +1,9 @@
 package com.pawstime.pawstime.domain.post.facade;
 
+import com.pawstime.pawstime.aws.s3.service.S3Service;
 import com.pawstime.pawstime.domain.board.entity.Board;
 import com.pawstime.pawstime.domain.image.dto.resp.GetImageRespDto;
 import com.pawstime.pawstime.domain.image.entity.Image;
-import com.pawstime.pawstime.domain.image.entity.repository.ImageRepository;
 import com.pawstime.pawstime.domain.image.service.ReadImageService;
 import com.pawstime.pawstime.domain.image.service.UpdateImageService;
 import com.pawstime.pawstime.domain.post.dto.req.CreatePostReqDto;
@@ -16,7 +16,6 @@ import com.pawstime.pawstime.domain.post.service.CreatePostService;
 import com.pawstime.pawstime.domain.post.service.GetDetailPostService;
 import com.pawstime.pawstime.domain.post.service.GetListPostService;
 import com.pawstime.pawstime.domain.post.service.ReadPostService;
-import com.pawstime.pawstime.domain.post.service.S3Service;
 import com.pawstime.pawstime.domain.post.service.UpdatePostService;
 import com.pawstime.pawstime.domain.user.entity.User;
 import com.pawstime.pawstime.domain.user.service.read.ReadUserService;
@@ -27,7 +26,7 @@ import com.pawstime.pawstime.global.exception.NotFoundException;
 import com.pawstime.pawstime.global.exception.UnauthorizedException;
 import com.pawstime.pawstime.global.jwt.util.JwtUtil;
 import jakarta.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -56,11 +55,12 @@ public class PostFacade {
     private final GetDetailPostService getDetailPostService;
     private final GetListPostService getListPostService;
     private final PostRepository postRepository;
-    private final S3Service s3Service;
+
     private final UpdateImageService updateImageService;
     private final ReadImageService readImageService;
     private final JwtUtil jwtUtil;
     private final ReadUserService readUserService;
+    private final S3Service s3Service;
 
     //게시글 생성
     public Long createPost(CreatePostReqDto req, HttpServletRequest request) {
@@ -213,7 +213,6 @@ public class PostFacade {
 
         }
     }
-
 
     public void deletePost(Long postId, HttpServletRequest httpServletRequest) {
         // 게시글 조회

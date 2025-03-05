@@ -1,4 +1,4 @@
-package com.pawstime.pawstime.global.config.aws;
+package com.pawstime.pawstime.aws.s3.config;
 
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;

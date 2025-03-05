@@ -19,6 +19,11 @@ spring:
     expiration_time: 86400000
     secret:
       key: VlwEyVBsYt9V7zq57TejMnVUyzblYcfPQye08f7MGVA9XkHa
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 10MB
 
 server:
   port: 8080
@@ -28,14 +33,8 @@ aws:
     access-key-id: ${AWS_ACCESS_KEY_ID}        # GitHub Secrets로 전달
     secret-access-key: ${AWS_SECRET_ACCESS_KEY} # GitHub Secrets로 전달
     region: ${AWS_REGION}                      # GitHub Secrets로 전달
-    bucket-name: ${AWS_BUCKET_NAME}    # GitHub Secrets로 전달
+    bucket-name: ${AWS_BUCKET_NAME}            # GitHub Secrets로 전달
 
 default:
-  img-url: "/static/default-img.jpg"
-
-  spring:
-    servlet:
-      multipart:
-        enabled: true
-        max-file-size: 10MB
-        max-request-size: 10MB
+  img-url: "https://s3.ap-northeast-2.amazonaws.com/paws-time-bucket/default-img.jpg"
+  profile-img-url: "https://s3.ap-northeast-2.amazonaws.com/paws-time-bucket/profile/profile-img.jpg"
