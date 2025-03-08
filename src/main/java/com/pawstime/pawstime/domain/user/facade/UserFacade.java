@@ -66,10 +66,6 @@ public class UserFacade {
       throw new UnauthorizedException("비밀번호가 일치하지 않습니다.");
     }
 
-    if(user.isDeleted()){
-      throw new UnauthorizedException("탈퇴한 계정입니다.");
-    }
-
     CustomUserInfoDto customUserInfoDto = CustomUserInfoDto.of(user);
     return jwtUtil.createAccessToken(customUserInfoDto);
   }
@@ -144,7 +140,7 @@ public class UserFacade {
     if (user==null){
       throw new NotFoundException("존재하지 않는 사용자입니다.");
     }
-    user.softDelete();
+    userRepository.delete(user);
     //  JWT 블랙리스트에 현재 토큰 등록 (자동 로그아웃)
     String token = request.getHeader("Authorization").substring(7);
     Claims claims = jwtUtil.parseClaims(token);

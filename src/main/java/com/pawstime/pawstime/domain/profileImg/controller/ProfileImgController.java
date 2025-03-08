@@ -1,7 +1,6 @@
 package com.pawstime.pawstime.domain.profileImg.controller;
 
 import com.pawstime.pawstime.domain.profileImg.dto.resp.GetProfileImgRespDto;
-import com.pawstime.pawstime.domain.profileImg.entity.ProfileImg;
 import com.pawstime.pawstime.domain.profileImg.facade.ProfileImgFacade;
 import com.pawstime.pawstime.global.common.ApiResponse;
 import com.pawstime.pawstime.global.enums.Status;
